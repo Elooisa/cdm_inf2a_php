@@ -60,7 +60,6 @@ if(isset($_REQUEST["entrar"])) {
         <div class="register-form" style="display: none;">
             <h2>Cadastro</h2>
             <form id="registerForm">
-                <input type="text" id="newUsername" placeholder="RM" required>
                 <input type="email" id="newEmail" placeholder="Email Institucional" required>
                 <input type="password" id="newPassword" placeholder="Crie sua senha" required>
                 <input type="password" id="newPassword" placeholder="Confirme a senha" required>
