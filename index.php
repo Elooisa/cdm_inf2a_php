@@ -1,19 +1,25 @@
 <?php
 session_start();
-$email=$_REQUEST["email"]??"";
-$senha=$_REQUEST["senha"]??"";
-echo $email;
-echo $senha;
-if($email== "fulano@gmail.com" && $senha== "123456"){
-    $_SESSION["acesso"]=true;
-    header("location:entrada.php");
-    exit();
+if(isset($_REQUEST["entrar"])) {
+    $email = $_REQUEST["email"] ?? "";
+    $senha = $_REQUEST["senha"] ?? "";
+    $alerta = "";
+
+    if ($email == "fulano@gmail.com" && $senha == "123456") {
+        $_SESSION["acesso"] = true;
+        header("location:entrada.php");
+        exit();
+    } else if ($email <> "" && $senha <> "") {
+        $alerta = "Email ou senha inválidos";
+    } else if ($email == "") {
+        $alerta = "Informe um email";
+    } else if ($senha == "") {
+        $alerta = "Informe uma senha";
+    }
+}else{
+    $alerta = "";
 }
-
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -28,6 +34,13 @@ if($email== "fulano@gmail.com" && $senha== "123456"){
     <div class="container">
         <div class="login-form">
             <h2>Login</h2>
+            <?php
+            if($alerta<>"")
+            {
+                echo "<h4 style='color: red; font-weight: bold'>".$alerta."</h4>";
+            }
+            ?>
+
             <form id="loginForm" method="POST" action="index.php">
                 <input name="email" type="text" id="u" placeholder="Email" required>
                 <input name="senha" type="password" id="password" placeholder="Senha" required>
