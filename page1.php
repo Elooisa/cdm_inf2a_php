@@ -1,8 +1,12 @@
 <?php 
+$alerta="";
+$data="";
 session_start();
 if($_SESSION["acesso"]==false){
-    header("location:index.php");
+    header("location:index.php");   
 }
+
+
 
 ?>
 
@@ -20,22 +24,40 @@ if($_SESSION["acesso"]==false){
 </head>
 <body>
     <div class="container">
-        <form id="menuForm">
+        <form id="menuForm" method="POST" action="page1.php"  >
+        <?php
+            if($alerta<>"")
+            {
+                echo "<h4 style='color: green; font-weight: bold'>".$alerta."</h4>";
+            }
+            ?>
             <label for="date">Data:</label>
-            <input type="date" id="date" required>
+            <input name="data" type="date" id="date" required>
             <label for="food">Alimento:</label>
             <input type="text" id="food" required>
             <label for="nutrition">Valores Nutricionais:</label>
             <textarea id="nutrition" required></textarea>
-            <button type="submit">Adicionar</button>
+            <button name="adicionar"  type="submit">Adicionar</button>
         </form>
         <div id="menuList">
             <h2>Cardápio</h2>
+            <table>
+            <tr>
+                <td> Data </td>
+                <td> Alimento </td>
+                <td> Valores Nutri </td>    
+            </tr> 
+            <tr>
+                <td>  </td>
+                <td>  </td>
+                <td>  </td>    
+            </tr>    
+            </table>
             <ul></ul>
             <button onclick="navigateTo('entrada.php')">Voltar</button>
         </div>
     </div>
-    <script src="js/cardapio.js"></script>
+    <!-- <script src="js/cardapio.js"></script> -->
     <script src="js/script.js"></script>
 </body>
 </html>

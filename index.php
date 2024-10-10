@@ -8,17 +8,19 @@ if(isset($_REQUEST["entrar"])) {
     if ($email == "fulano@gmail.com" && $senha == "123456") {
         $_SESSION["acesso"] = true;
         header("location:entrada.php");
-        exit();
+        exit();     
     } else if ($email <> "" && $senha <> "") {
-        $alerta = "Email ou senha inválidos";
-    } else if ($email == "") {
-        $alerta = "Informe um email";
-    } else if ($senha == "") {
-        $alerta = "Informe uma senha";
+        $alerta = "Email ou senha são inválidos";
+    } else if ($email == "" || $senha == "" ) {
+        $alerta = "Email ou senha estão vazios";
+    } else {
+       $alerta = "";
     }
-}else{
-    $alerta = "";
 }
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +37,7 @@ if(isset($_REQUEST["entrar"])) {
         <div class="login-form">
             <h2>Login</h2>
             <?php
-            if($alerta<>"")
+            if(isset($alerta) && $alerta<>"")
             {
                 echo "<h4 style='color: red; font-weight: bold'>".$alerta."</h4>";
             }
@@ -44,7 +46,7 @@ if(isset($_REQUEST["entrar"])) {
             <form id="loginForm" method="POST" action="index.php">
                 <input name="email" type="text" id="u" placeholder="Email" required>
                 <input name="senha" type="password" id="password" placeholder="Senha" required>
-                <button type="submit">Entrar</button>
+                <button name="entrar" type="submit">Entrar</button>
             </form>
             <a href="#" id="forgotPassword">Esqueceu a senha?</a>
             <a href="#" id="register">Primeiro acesso? Cadastre-se</a>
